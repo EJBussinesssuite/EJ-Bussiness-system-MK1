@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EJ Business Systems PRO — MK1</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #071410;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  padding: 25px;
+  background: #102c22;
+  border-bottom: 2px solid #20b8a5;
+}
+
+h1 { color: #a3ffe0; }
+
+main { padding: 20px; }
+
+.card {
+  background: #153629;
+  border: 1px solid #397d68;
+  border-radius: 15px;
+  padding: 22px;
+  margin-bottom: 15px;
+}
+
+button {
+  background: #20b8a5;
+  color: #001b15;
+  border: 0;
+  border-radius: 10px;
+  padding: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#status { margin-top: 15px; }
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>EJ BUSINESS SYSTEMS PRO</h1>
+<p>MK1 — Cloud Testing</p>
+</header>
+
+<main>
+
+<div class="card">
+<h2>Rojan Engines & Gearboxes</h2>
+<p>Pilot Company Workspace</p>
+</div>
+
+<div class="card">
+<h2>Cloud Server</h2>
+<button onclick="checkServer()">Check Connection</button>
+<p id="status">Waiting for connection test...</p>
+</div>
+
+<div class="card">
+<h2>Social Lead Engine</h2>
+<p>Facebook: Not connected</p>
+<p>Instagram: Not connected</p>
+<p>WhatsApp: Not connected</p>
+<p>X: Not connected</p>
+<p>Live leads: 0</p>
+</div>
+
+</main>
+
+<script>
+async function checkServer() {
+  const status = document.getElementById("status");
+  status.textContent = "Checking...";
+
+  try {
+    const response = await fetch("/api/status");
+
+    if (!response.ok) {
+      throw new Error("Server returned " + response.status);
+    }
+
+    const data = await response.json();
+
+    status.textContent =
+      "ONLINE — " + data.app + " " + data.version;
+
+  } catch (error) {
+    status.textContent =
+      "Connection failed: " + error.message;
+  }
+}
+</script>
+
+</body>
+</html>
