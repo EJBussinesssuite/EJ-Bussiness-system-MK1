@@ -1,7 +1,3 @@
-services:
-  - type: web
-    name: ej-business-systems-mk1
-    runtime: python
-    plan: free
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "python server.py"
+
+# EJ Business Systems PRO - MK1
+# No external Python packages required
